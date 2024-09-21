@@ -5,22 +5,20 @@ const Profile = () => {
 	const [data, setData] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(0);
-	const tag = "HINTER_CAR_CH1_REF_SUCT_TEMP"; // El tag que quieres filtrar
-
+	const tag = import.meta.env.VITE_TAG_PTAR_HINTER_CAR;
+	const URL_QUERY_DB = import.meta.env.VITE_URL_QUERY_PTAR_HINTER_CAR;
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await axios.get(
-					"http://localhost:8080/api/getFileData",
-					{
-						params: {
-							tag,
-							page: currentPage,
-							limit: 15, // Cantidad de items por página
-						},
-					}
-				);
+				const response = await axios.get(`${URL_QUERY_DB}/api/getFileData`, {
+					params: {
+						tag,
+						page: currentPage,
+						limit: 15, // Cantidad de items por página
+					},
+				});
 
+				//console.log(response.data.data);
 				setData(response.data.data);
 				setCurrentPage(response.data.currentPage);
 				setTotalPages(response.data.totalPages);
