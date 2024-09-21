@@ -1,36 +1,47 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
+import Navbar from "./Navbar";
 
 const DashBoard = () => {
-    const [userInfo, setUserInfo] = useState(null);
-    const navigate = useNavigate();
+	const [userInfo, setUserInfo] = useState(null);
 
-    useEffect(() => {
-        const data = localStorage.getItem('user-info');
-        if(data) {
-            setUserInfo(JSON.parse(data));
-        }
-    },[])
+	useEffect(() => {
+		const data = localStorage.getItem("user-info");
+		//console.log(data);
+		if (data) {
+			setUserInfo(JSON.parse(data));
+		}
+	}, []);
 
-    const handleLogout = () => {
-        localStorage.removeItem('jwtToken');
-        localStorage.removeItem('user-info');
-        navigate('/login');
-    }
-  return (
-		<div className="flex flex-col items-center justify-center h-screen">
-			<h1>Bienvenido {userInfo?.name}</h1>
-			<h3>Email: {userInfo?.email}</h3>
-			<img src={userInfo?.picture} alt={userInfo?.email} />
+	return (
+		<div>
+			<Navbar userInfo={userInfo} />
+			<div className="">
+				<section className="flex justify-between lg:justify-around mt-4 ">
+					<h1 className="ml-3 text-2xl font-bold">
+						Bienvenido <span className="text-sky-800">{userInfo?.name}</span>
+					</h1>
 
-			<button
-				className="mt-8 border border-gray-700 text-slate-900 py-4 px-6 rounded bg-transparent hover:bg-blue-500 hover:text-white transition text-lg font-semibold"
-				onClick={handleLogout}
-			>
-				Cerrar Sesión
-			</button>
+					{/* Botones para navegar a Home y Profile */}
+					<div className="mb-6 space-x-4">
+						<Link to="/dashboard/home">
+							<button className="px-4 py-2 rounded-lg bg-slate-700 hover:bg-gray-500 text-white font-semibold disabled:bg-gray-300 uppercase">
+								Project EMPRESA_LACTEA_SOL
+							</button>
+						</Link>
+
+						<Link to="/dashboard/profile">
+							<button className="px-4 py-2 rounded-lg bg-slate-700 hover:bg-gray-500 text-white font-semibold disabled:bg-gray-300 uppercase">
+								Project Empresa HINTER_CAR
+							</button>
+						</Link>
+					</div>
+				</section>
+
+				<Outlet />
+			</div>
 		</div>
 	);
-}
+};
 
 export default DashBoard

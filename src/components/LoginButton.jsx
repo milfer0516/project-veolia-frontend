@@ -44,10 +44,11 @@ const LoginButton = () => {
 					Inicia Sesión en{" "}
 					<span className="text-sky-900 text-2xl font-bold">Veolia</span>
 				</h1>
-				<button 
-				    onClick={handleLogin}
-					className="mt-8 border border-blue-500 text-slate-900 py-4 px-6 rounded bg-transparent hover:bg-blue-500 hover:text-white transition text-lg font-semibold">
-						Iniciar Sesión con Google
+				<button
+					onClick={handleLogin}
+					className="mt-8 border border-blue-500 text-slate-900 py-4 px-6 bg-transparent hover:bg-blue-500 hover:text-white transition text-lg font-semibold rounded-lg"
+				>
+					Iniciar Sesión con Google
 				</button>
 			</div>
 		</>
