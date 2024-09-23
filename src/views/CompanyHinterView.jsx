@@ -1,3 +1,4 @@
+/* eslint-disable no-const-assign */
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -6,19 +7,23 @@ const Profile = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(0);
 	const tag = import.meta.env.VITE_TAG_PTAR_HINTER_CAR;
-	const URL_QUERY_DB = import.meta.env.VITE_URL_QUERY_PTAR_HINTER_CAR;
+	const URL_QUERY_DB = import.meta.env.VITE_URL_QUERY_DB;
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await axios.get(`${URL_QUERY_DB}/api/getFileData`, {
-					params: {
-						tag,
-						page: currentPage,
-						limit: 15, // Cantidad de items por página
-					},
-				});
+				const response = await axios.get(
+					`${URL_QUERY_DB}/api/
+					getFileData`,
+					{
+						params: {
+							tag,
+							page: currentPage,
+							limit: 15, // Cantidad de items por página
+						},
+					}
+				);
 
-				//console.log(response.data.data);
+				//console.log(response.data.limit);
 				setData(response.data.data);
 				setCurrentPage(response.data.currentPage);
 				setTotalPages(response.data.totalPages);
@@ -28,12 +33,13 @@ const Profile = () => {
 		};
 
 		fetchData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentPage]);
-
 	// Función para cambiar de página
 	const handlePageChange = (page) => {
 		setCurrentPage(page);
 	};
+	// Función para buscar por ID
 
 	return (
 		<div className="p-4">
@@ -46,8 +52,12 @@ const Profile = () => {
 					<thead className="bg-gray-100 border-b">
 						<tr>
 							<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+								ID
+							</th>
+							<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 								Tag
 							</th>
+
 							<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 								Moment
 							</th>
@@ -60,8 +70,15 @@ const Profile = () => {
 						</tr>
 					</thead>
 					<tbody className="bg-white divide-y divide-gray-200">
-						{data.map((item) => (
-							<tr key={item._id} className="hover:bg-gray-100">
+						{data.map((item, index) => (
+							<tr key={index} className="hover:bg-gray-100">
+								<td
+									onChange={handlePageChange}
+									className="px-6 py-4 whitespace-nowrap   
+ 									text-sm font-medium text-gray-900"
+								>
+									{index + 1}
+								</td>
 								<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
 									{item.tag}
 								</td>

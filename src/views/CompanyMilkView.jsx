@@ -6,7 +6,7 @@ const Home = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(0);
 	const tag = import.meta.env.VITE_TAG_PTAR_EMPRESA_LACTEA;
-	const URL_QUERY_DB = import.meta.env.VITE_URL_QUERY_PTAR_EMPRESA_LACTEA;
+	const URL_QUERY_DB = import.meta.env.VITE_URL_QUERY_DB;
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -23,6 +23,7 @@ const Home = () => {
 				setCurrentPage(response.data.currentPage);
 				setTotalPages(response.data.totalPages);
 			} catch (error) {
+				console.log("Error: ", error);
 				console.error("Error fetching data:", error);
 			}
 		};
@@ -46,6 +47,9 @@ const Home = () => {
 					<thead className="bg-gray-100 border-b">
 						<tr>
 							<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+								ID
+							</th>
+							<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 								Tag
 							</th>
 							<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -60,8 +64,11 @@ const Home = () => {
 						</tr>
 					</thead>
 					<tbody className="bg-white divide-y divide-gray-200">
-						{data.map((item) => (
-							<tr key={item._id} className="hover:bg-gray-100">
+						{data.map((item, index) => (
+							<tr key={index} className="hover:bg-gray-100">
+								<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+									{index + 1}
+								</td>
 								<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
 									{item.tag}
 								</td>

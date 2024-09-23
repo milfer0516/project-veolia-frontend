@@ -23,7 +23,7 @@ const DashBoard = () => {
 						Bienvenido <span className="text-sky-800">{userInfo?.name}</span>
 					</h1>
 				</section>
-				<section>
+				<section className="mx-auto w-[95%]">
 					<h2 className="text-2xl font-bold mt-4 mb-2">Proyectos</h2>
 					<CardContainer />
 				</section>
