@@ -28,8 +28,8 @@ function App() {
 		<BrowserRouter>
 			<AuthProvider>
 				<Routes>
-					<Route path="/login" element={<GoogleOAuthWrapper />} />
-					<Route path="/login" element={<Navigate to="/login" />} />
+					<Route index element={<GoogleOAuthWrapper />} />
+					<Route element={<Navigate to="/login" />} />
 					<Route />
 					{/* Rutas públicas */}
 					<Route path="/register" element={<RegisterView />} />
