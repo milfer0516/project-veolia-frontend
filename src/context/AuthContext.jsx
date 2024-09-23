@@ -9,17 +9,15 @@ export const AuthProvider = ({ children }) => {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	//const navigate = useNavigate();
 
-	useEffect(() => {
-		const dataUser = localStorage.getItem("user-info");
-		const token = JSON.parse(dataUser)?.token;
-
-		if (token) {
-			//console.log(token);
-			setIsAuthenticated(true);
-		} else {
-			setIsAuthenticated(false);
-		}
-	}, []);
+	 useEffect(() => {
+			const dataUser = localStorage.getItem("user-info");
+			const parsedUser = JSON.parse(dataUser);
+			if (parsedUser && parsedUser.token) {
+				setIsAuthenticated(true);
+			} else {
+				setIsAuthenticated(false);
+			}
+		}, []);
 
 	return (
 		<AuthContext.Provider value={{ isAuthenticated }}>

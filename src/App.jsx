@@ -8,6 +8,8 @@ import Home from "./views/Home";
 import Profile from "./views/Profile";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
+import LoginView from "./views/LoginView";
+import RegisterView from "./views/RegisterView";
 //import Home from "./components/Home";
 
 function App() {
@@ -16,6 +18,7 @@ function App() {
 	const GoogleOAuthWrapper = () => {
 		return (
 			<GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+				<LoginView></LoginView>
 				<LoginButton></LoginButton>
 			</GoogleOAuthProvider>
 		);
@@ -26,7 +29,10 @@ function App() {
 			<AuthProvider>
 				<Routes>
 					<Route path="/login" element={<GoogleOAuthWrapper />} />
-					<Route index="/login" />
+					<Route index element={<Navigate to="/login" />} />
+					<Route />
+					{/* Rutas públicas */}
+					<Route path="/register" element={<RegisterView />} />
 					{/* Rutas protegidas */}
 					{/* Ruta protegida para el dashboard y rutas hijas */}
 					<Route element={<PrivateRoute />}>
