@@ -4,8 +4,8 @@ import DashBoard from "./components/DashBoard";
 import PageNotFound from "./components/PageNotFound";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
-import Home from "./views/Home";
-import Profile from "./views/Profile";
+import CompanyMilkView from "./views/CompanyMilkView";
+import CompanyHinterView from "./views/CompanyHinterView";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 import LoginView from "./views/LoginView";
@@ -37,8 +37,8 @@ function App() {
 					{/* Ruta protegida para el dashboard y rutas hijas */}
 					<Route element={<PrivateRoute />}>
 						<Route path="/dashboard" element={<DashBoard />}>
-							<Route path="profile" element={<Profile />} />
-							<Route path="home" element={<Home />} />
+							<Route path="profile" element={<CompanyHinterView />} />
+							<Route path="home" element={<CompanyMilkView />} />
 						</Route>
 					</Route>
 
